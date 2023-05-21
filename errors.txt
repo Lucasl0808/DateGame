@@ -1,0 +1,14 @@
+﻿I'm sorry, but errors were detected in your script. Please correct the
+errors listed below, and try again.
+
+
+File "game/script.rpy", line 39: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
+    "Hey Raven, it was alright! How about yours?"
+                                                 ^
+
+File "game/script.rpy", line 71: Line is followed by a block, despite not being a menu choice. Did you forget a colon at the end of the line?
+    "So, do you have social media or anything?"
+                                               ^
+
+Ren'Py Version: Ren'Py 8.1.0.23051307
+Sat May 20 18:39:23 2023
