@@ -15,16 +15,58 @@ label start:
     # add a file (named either "bg room.png" or "bg room.jpg") to the
     # images directory to show it.
     $sus_points = 0
+    $suit = False
 
-    scene bg room
+    scene bedroom
 
     # This shows a character sprite. A placeholder is used, but you can
     # replace it by adding a file named "eileen happy.png" to the images
     # directory.
+    "I pull myself out of bed to the sound of my alarm and my phone buzzing."
+    "I see a text on my phone from a girl, Raven, who I met through a dating app online"
+    raven "I can't wait to see you today _______!"
     python:
         name = renpy.input("Enter Your Name:")
 
         name = name.strip() or "You"
+    "I arranged a date with her at a nice restaurant"
+    "I should probably get ready and find something appropriate to wear..."
+    menu:
+        "Formal Suit":
+            "This looks nice, but might be a bit too fancy for a first meeting"
+            $suit = True
+            menu:
+                "Semi-Formal Suit" if suit == True:
+                    "This is perfect fit for the date!"
+                    "I should get going to the restaurant"
+                    jump restaurantDate
+                "Bright Graphic t-shirt":
+                    "No way I'm wearing this to the first date, though it could be a conversation starter.."
+                    menu:
+                        "Semi-Formal Suit" if suit == True:
+                            "This is perfect fit for the date!"
+                            "I should get going to the restaurant"
+                            jump restaurantDate
+        "Bright Graphic t-shirt":
+            "No way I'm wearing this to the first date, though it could be a conversation starter.."
+            menu:
+                "Formal Suit":
+                    "This looks nice, but might be a bit too fancy for a first meeting"
+                    $suit = True
+                    menu:
+                        "Semi-Formal Suit":
+                            "This is a perfect fit for the date!"
+                            "I should get going to the restaurant"
+                            jump restaurantDate
+                "Semi-Formal Suit" if suit == True:
+                    "This is perfect fit for the date!"
+                    "I should get going to the restaurant"
+                    jump restaurantDate
+
+    label restaurantDate:
+        "This is the restaurant scene start"
+        "This is the end of restaurant scene"
+
 
     "You arrive at the carnival with Raven."
     scene carnival at center:
@@ -117,8 +159,9 @@ label start:
 
         you "I agree, it really is something else."
 
-        "Like anyone does, I of course stalked Raven on social media to find out what I was getting into."
-        "...But one thing I noticed was that she has barely any presence online. I found almost nothing on her."
+        "Suddenly, I remember looking through her dating profile and I didn't see anything about other social media 
+        platforms online."
+        "Its almost as if she is trying to hide her online presence"
         menu:
 
             "So, do you have social media or anything?":
