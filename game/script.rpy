@@ -65,6 +65,54 @@ label start:
 
     label restaurantDate:
         "This is the restaurant scene start"
+
+        "I arrive at the restaurant a bit early and wait a bit until I see someone who ressembles the person in Raven's profile picture"
+        "Suddenly I hear a voice -"
+        raven "[you]!"
+        "I turn around and see the person that I've been longing to talk to"
+        show ravendefault at center:
+            zoom 0.5
+        raven "Have you been waiting long?"
+
+        menu:
+            "Not at all!":
+                you "Not really, I just got here"
+                hide ravendefault
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "Great! Shall we get going?"
+                hide ravenhappy
+            "I've been waiting forever":
+                you "Yeah I've been waiting for hours"
+                hide ravendefault 
+                show ravensurprised at center:
+                    zoom 0.5
+                raven "Oh really?! Sorry I didn't realize you were coming so soon or I would've left earlier"
+                you "No that was a joke haha... I barely got here too"
+                hide ravensurprised
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "Oh sorry I haven't adjusted to your sarcasm yet haha... Lets get going! I'm hungry"
+                hide ravenhappy
+            "I would wait forever for you":
+                you "I'd wait forever for you"
+                hide ravendefault
+                show ravenblush at center:
+                    zoom 0.5
+                raven "Oh stop it"
+                raven "I know you just got here too"
+                hide ravenblush 
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "Cmon! Lets go in, I'm starving"
+                hide ravenhappy
+
+        "We go inside the restaurant and get seated"
+
+        show ravendefault at center:
+            zoom 0.5
+        "DINING"
+
         "This is the end of restaurant scene"
 
 
