@@ -5,8 +5,10 @@
 
 define raven = Character("Raven")
 define you = Character("[name]")
+define waiter = Character("Waiter")
 
 image ravendefault = "images/ravendefault.png"
+image Waiter = "images/waiter.png"
 # The game starts here.
 
 label start:
@@ -16,7 +18,7 @@ label start:
     # images directory to show it.
     $sus_points = 0
     $suit = False
-
+    $appetizer = ""
     scene bedroom
 
     # This shows a character sprite. A placeholder is used, but you can
@@ -39,6 +41,7 @@ label start:
                 "Semi-Formal Suit" if suit == True:
                     "This is perfect fit for the date!"
                     "I should get going to the restaurant"
+                    scene restaurant
                     jump restaurantDate
                 "Bright Graphic t-shirt":
                     "No way I'm wearing this to the first date, though it could be a conversation starter.."
@@ -46,6 +49,7 @@ label start:
                         "Semi-Formal Suit" if suit == True:
                             "This is perfect fit for the date!"
                             "I should get going to the restaurant"
+                            scene restaurant
                             jump restaurantDate
         "Bright Graphic t-shirt":
             "No way I'm wearing this to the first date, though it could be a conversation starter.."
@@ -57,10 +61,12 @@ label start:
                         "Semi-Formal Suit":
                             "This is a perfect fit for the date!"
                             "I should get going to the restaurant"
+                            scene restaurant
                             jump restaurantDate
                 "Semi-Formal Suit" if suit == True:
                     "This is perfect fit for the date!"
                     "I should get going to the restaurant"
+                    scene restaurant
                     jump restaurantDate
 
     label restaurantDate:
@@ -109,10 +115,233 @@ label start:
 
         "We go inside the restaurant and get seated"
 
+        show waiter at center:
+            zoom 0.5
+        "You sit down with raven at the table and start to look at the menu"
+        waiter "Hi guys, welcome in."
+        waiter "Can I get you started on any appetizers?"
+
+        menu:
+            "Salad":
+                $appetizer = "Salad"
+                hide waiter
+                show ravensurprised at center:
+                    zoom 0.5
+                raven "Wow what a healthy choice"
+                hide ravensurprised
+            "French Fries":
+                $appetizer = "Fries"
+                hide waiter
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "Fries... what a classic"
+                raven "Maybe I'll pick a couple off of yours later"
+                hide ravenhappy
+            "I don't want to order an appetizer":
+                hide waiter
+                show ravensurprised at center:
+                    zoom 0.5
+                raven "Not an appetizer person huh."
+                hide ravensurprised
+        show waiter at center:
+            zoom 0.5
+        waiter "Alright I'll go get that started for you guys"
+        you "Thanks"
+        hide waiter
+
         show ravendefault at center:
             zoom 0.5
-        "DINING"
+        you "So what did you order?"
+        raven "I ordered a Steak Tartare with some wine"
+        you "Isn't that like raw steak?"
+        hide ravendefault
+        show ravenannoyed at center:
+            zoom 0.5
+        raven "Yeah is something wrong with that?"
+        you "No not at all!..."
+        hide ravenannoyed
+        show ravenhappy at center:
+            zoom 0.5
+        raven "Great, you should try it sometime its not that bad, but kinda pricey"
+        hide ravenhappy
+        show waiter at center:
+            zoom 0.5
+        waiter "So I have here a Steak tartare and a glass of wine"
+        if(appetizer != ""):
+            waiter "I also have an order of [appetizer]"
+        
+        you "Thank you"
 
+        hide waiter
+        show ravendefault at center:
+            zoom 0.5
+        menu:
+            "So... you like wine?":
+                hide ravendefault
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "Yeah I love drinking wine, something about it is great..."
+                hide ravenhappy
+            "Drinking wine this early?":
+                hide ravendefault
+                show ravenannoyed at center:
+                    zoom 0.5
+                raven "Yeah you got a problem with that?"
+                raven "I'll drink whenever I want to"
+                hide ravenannoyed
+        show ravensurprised at center:
+            zoom 0.5
+        raven "Wait a second..."
+        raven "This isn't the right drink!"
+        hide ravensurprised
+        show ravenangry at center:
+            zoom 0.5
+        raven "Waiter?!"
+        hide ravenangry
+        show waiter at center:
+            zoom 0.5
+        waiter "Yes is there a problem?"
+        hide waiter
+        show ravenangry at center:
+            zoom 0.5
+        raven "Yeah can I have wine that I ordered, this is champagne"
+        hide ravenangry
+        show waiter at center:
+            zoom 0.5
+        waiter "Sorry about that, I'll go get your drink right now"
+        hide waiter
+        show ravenannoyed at center:
+            zoom 0.5
+        raven "Ugh, thats annoying."
+        you "You really want that wine huh"
+        hide ravenannoyed
+        show ravensurprised at center:
+            zoom 0.5
+        raven "Sorry that was a bit out of pocket"
+        hide ravensurprised
+        show ravenannoyed at center:
+            zoom 0.5
+        raven "Yeah I was looking forwards to it, since I only ever drink wine from my brothers' place"
+        menu:
+            "Brother?":
+                hide ravenannoyed
+                show ravensurprised at center:
+                    zoom 0.5
+                raven "Yeah I have an older brother who works at a vineyard"
+                raven "He's kinda wild though, like he does some crazy shit with his coworkers sometimes"
+                hide ravensurprised
+            "Tell me more about your brother":
+                hide ravenannoyed
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "Yeah, so my brother is older than me by a couple years and he works at a vineyard"
+                raven "He comes back every once in a while to ask me do some some favors for him but thats about it, I don't see him often"
+                hide ravenhappy
+        show waiter at center:
+            zoom 0.5
+        waiter "Do you want to order any entrees?"
+        hide waiter
+        show ravendefault at center:
+            zoom 0.5
+        raven "I'll have a steak"
+        hide ravendefault
+        show waiter at center:
+            zoom 0.5
+        waiter "And for you?"
+        menu:
+            "Steak":
+                waiter "excellent choice, I'll be back with that shortly"
+                hide waiter
+            "Whatever you suggest":
+                waiter "I'd suggest the Lobster risotto special that we have"
+                you "I'll have that then"
+                waiter "Great, I'll be back with those soon"
+                hide waiter
+            "I'm Ok":
+                waiter "Thats ok. Let me know if you need anything else"
+                hide waiter
+        "Some time passes and the waiter brings us our dishes"
+        show ravenhappy at center:
+            zoom 0.5
+        raven "Wow this looks so good I can't wait to dig in!"
+
+        "Raven starts skillfully spinning the steak knife in her hand in excitement"
+
+        menu:
+            "Careful with that":
+                hide ravenhappy
+                show ravenblush at center:
+                    zoom 0.5
+                raven "Don't worry I've done this enough to be good at it"
+                raven "You aren't in danger unless you want to be"
+                hide ravenblush
+                show ravendefault at center:
+                    zoom 0.5
+                raven "..."
+                raven ".."
+                hide ravendefault
+                show ravenangry at center:
+                    zoom 0.5
+                raven "!"
+                hide ravenangry
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "just kidding! Why would I do that?"
+                hide ravenhappy
+            "Woah put that down":
+                hide ravenhappy
+                show ravenannoyed at center:
+                    zoom 0.5
+                raven "what you don't trust me enough to hold a knife?"
+                raven "You wouldn't be in danger unless you piss me off"
+                hide ravenannoyed
+                show ravendefault at center:
+                    zoom 0.5
+                raven "..."
+                raven ".."
+                hide ravendefault
+                show ravenangry at center:
+                    zoom 0.5
+                raven "!"
+                hide ravenangry
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "just kidding! Why would I do that?"
+                hide ravenhappy
+            "Damn thats cool":
+                hide ravenhappy
+                show ravenblush at center:
+                    zoom 0.5
+                raven "Right?! I learned this from my brother a while back"
+                raven "Most people get scared off by this kinda stuff though"
+                raven "I haven't dropped or screwed up my knife spinning since like a couple of years ago I think"
+                hide ravenblush
+
+        "A while passes and we both finish our food and clear out of the restaurant"
+
+        show ravensad at center:
+            zoom 0.5
+        raven "Maaan I am stuffed, that steak was way too much food"
+        raven "We should probably walk off the food..."
+        raven "So I was thinking, theres that new carnival that opened up recently, we could head there if you want to"
+        menu:
+            "Sounds good":
+                hide ravensad
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "great lets head over there"
+                hide ravenhappy
+            "Carnival?":
+                hide ravensad
+                show ravensurprised at center:
+                    zoom 0.5
+                raven "Yeah the new one? its apparently really cool and the first week is free entry"
+                you "Free Entry?! I'm in"
+                hide ravensurprised
+                show ravenhappy at center:
+                    zoom 0.5
+                raven "great lets go then"
+                hide ravenhappy
         "This is the end of restaurant scene"
 
 
@@ -127,7 +356,7 @@ label start:
 
     # These display lines of dialogue.
 
-    raven "Hey [you], glad you could make it, how was your sleep?"
+    raven "Hey [you], glad you could make it, how was the ride here?"
 
     menu:
         "Hey Raven, it was alright! How about yours?":
